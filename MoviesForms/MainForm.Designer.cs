@@ -44,11 +44,13 @@ namespace MoviesForms
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.buttonDelete = new System.Windows.Forms.Button();
+            this.buttonTableChange = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(397, 441);
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.button1.Location = new System.Drawing.Point(416, 441);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(102, 28);
             this.button1.TabIndex = 0;
@@ -62,7 +64,7 @@ namespace MoviesForms
             this.treeView1.ImeMode = System.Windows.Forms.ImeMode.NoControl;
             this.treeView1.Location = new System.Drawing.Point(12, 109);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(165, 284);
+            this.treeView1.Size = new System.Drawing.Size(174, 301);
             this.treeView1.TabIndex = 1;
             // 
             // textBoxComposite
@@ -71,7 +73,7 @@ namespace MoviesForms
             this.textBoxComposite.Location = new System.Drawing.Point(12, 432);
             this.textBoxComposite.Multiline = true;
             this.textBoxComposite.Name = "textBoxComposite";
-            this.textBoxComposite.Size = new System.Drawing.Size(273, 37);
+            this.textBoxComposite.Size = new System.Drawing.Size(282, 37);
             this.textBoxComposite.TabIndex = 2;
             // 
             // comboBoxBases
@@ -85,7 +87,7 @@ namespace MoviesForms
             "VPD_311_Import"});
             this.comboBoxBases.Location = new System.Drawing.Point(12, 46);
             this.comboBoxBases.Name = "comboBoxBases";
-            this.comboBoxBases.Size = new System.Drawing.Size(147, 24);
+            this.comboBoxBases.Size = new System.Drawing.Size(156, 24);
             this.comboBoxBases.TabIndex = 3;
             this.comboBoxBases.SelectedIndexChanged += new System.EventHandler(this.comboBoxBases_SelectedIndexChanged);
             // 
@@ -112,7 +114,7 @@ namespace MoviesForms
             // buttonAdd
             // 
             this.buttonAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonAdd.Location = new System.Drawing.Point(183, 249);
+            this.buttonAdd.Location = new System.Drawing.Point(192, 249);
             this.buttonAdd.Name = "buttonAdd";
             this.buttonAdd.Size = new System.Drawing.Size(102, 28);
             this.buttonAdd.TabIndex = 6;
@@ -125,9 +127,9 @@ namespace MoviesForms
             this.listBoxColumn.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.listBoxColumn.FormattingEnabled = true;
             this.listBoxColumn.ItemHeight = 16;
-            this.listBoxColumn.Location = new System.Drawing.Point(291, 109);
+            this.listBoxColumn.Location = new System.Drawing.Point(300, 109);
             this.listBoxColumn.Name = "listBoxColumn";
-            this.listBoxColumn.Size = new System.Drawing.Size(208, 84);
+            this.listBoxColumn.Size = new System.Drawing.Size(218, 84);
             this.listBoxColumn.TabIndex = 7;
             this.listBoxColumn.SelectedValueChanged += new System.EventHandler(this.listBoxColumn_SelectedIndexChanged);
             this.listBoxColumn.Enter += new System.EventHandler(this.listBoxColumn_SelectedIndexChanged);
@@ -137,9 +139,9 @@ namespace MoviesForms
             this.listBoxTable.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.listBoxTable.FormattingEnabled = true;
             this.listBoxTable.ItemHeight = 16;
-            this.listBoxTable.Location = new System.Drawing.Point(291, 215);
+            this.listBoxTable.Location = new System.Drawing.Point(300, 215);
             this.listBoxTable.Name = "listBoxTable";
-            this.listBoxTable.Size = new System.Drawing.Size(208, 84);
+            this.listBoxTable.Size = new System.Drawing.Size(218, 84);
             this.listBoxTable.TabIndex = 8;
             this.listBoxTable.SelectedValueChanged += new System.EventHandler(this.listBoxTable_SelectedIndexChanged);
             this.listBoxTable.Enter += new System.EventHandler(this.listBoxTable_SelectedIndexChanged);
@@ -147,17 +149,17 @@ namespace MoviesForms
             // textBoxCondition
             // 
             this.textBoxCondition.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBoxCondition.Location = new System.Drawing.Point(291, 323);
+            this.textBoxCondition.Location = new System.Drawing.Point(300, 323);
             this.textBoxCondition.Multiline = true;
             this.textBoxCondition.Name = "textBoxCondition";
-            this.textBoxCondition.Size = new System.Drawing.Size(208, 70);
+            this.textBoxCondition.Size = new System.Drawing.Size(218, 87);
             this.textBoxCondition.TabIndex = 9;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(288, 90);
+            this.label3.Location = new System.Drawing.Point(297, 90);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(63, 16);
             this.label3.TabIndex = 10;
@@ -167,7 +169,7 @@ namespace MoviesForms
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(288, 196);
+            this.label4.Location = new System.Drawing.Point(297, 196);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(50, 16);
             this.label4.TabIndex = 11;
@@ -177,7 +179,7 @@ namespace MoviesForms
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.Location = new System.Drawing.Point(288, 304);
+            this.label5.Location = new System.Drawing.Point(297, 304);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(62, 16);
             this.label5.TabIndex = 12;
@@ -187,7 +189,7 @@ namespace MoviesForms
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label6.Location = new System.Drawing.Point(12, 413);
+            this.label6.Location = new System.Drawing.Point(9, 413);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(122, 16);
             this.label6.TabIndex = 13;
@@ -196,19 +198,31 @@ namespace MoviesForms
             // buttonDelete
             // 
             this.buttonDelete.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.buttonDelete.Location = new System.Drawing.Point(183, 215);
+            this.buttonDelete.Location = new System.Drawing.Point(192, 215);
             this.buttonDelete.Name = "buttonDelete";
             this.buttonDelete.Size = new System.Drawing.Size(102, 28);
             this.buttonDelete.TabIndex = 14;
-            this.buttonDelete.Text = "<< Delete";
+            this.buttonDelete.Text = "<< Remove";
             this.buttonDelete.UseVisualStyleBackColor = true;
             this.buttonDelete.Click += new System.EventHandler(this.buttonDelete_Click);
+            // 
+            // buttonTableChange
+            // 
+            this.buttonTableChange.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.buttonTableChange.Location = new System.Drawing.Point(300, 441);
+            this.buttonTableChange.Name = "buttonTableChange";
+            this.buttonTableChange.Size = new System.Drawing.Size(110, 28);
+            this.buttonTableChange.TabIndex = 15;
+            this.buttonTableChange.Text = "Table change";
+            this.buttonTableChange.UseVisualStyleBackColor = true;
+            this.buttonTableChange.Click += new System.EventHandler(this.buttonTableChange_Click);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(511, 481);
+            this.ClientSize = new System.Drawing.Size(532, 481);
+            this.Controls.Add(this.buttonTableChange);
             this.Controls.Add(this.buttonDelete);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -248,5 +262,6 @@ namespace MoviesForms
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button buttonDelete;
+        private System.Windows.Forms.Button buttonTableChange;
     }
 }

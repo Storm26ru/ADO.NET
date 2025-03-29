@@ -116,5 +116,14 @@ namespace MoviesForms
             treeView1.Nodes.Clear();
             data_initialization(comboBoxBases.SelectedItem.ToString());
         }
+
+        private void buttonTableChange_Click(object sender, EventArgs e)
+        {
+            string query_table = string_query(listBoxTable);
+            if (query_table == "") return;
+            string query = $"SELECT * FROM {query_table}";
+            TableChangeForm tableChangeForm = new TableChangeForm(query);
+            tableChangeForm. Show();
+        }
     }
 }

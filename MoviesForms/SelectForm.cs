@@ -15,14 +15,7 @@ namespace MoviesForms
         public TextBox textBox { get => textBoxQuery; set => textBoxQuery.Text = value.Text; }
         public SelectForm()
         {
-            InitializeComponent();
-
-            //foreach (DataTable dt in connector.Select().Tables)
-            //{
-            //    foreach (DataRow dr in dt.Rows) listBoxSelect.Items.AddRange(dr.ItemArray);
-            //}
-                
-            
+            InitializeComponent();          
         }
 
         private void buttonExecute_Click(object sender, EventArgs e)
@@ -30,13 +23,7 @@ namespace MoviesForms
            Connector connector = new Connector();
            Base @base = new Base();
            @base.dataGridView.DataSource = connector.Select(textBoxQuery.Text).Tables[0];
-          //@base.dataGridView.DataSource = connector.Select("TABLE_NAME", "INFORMATION_SCHEMA.TABLES").Tables[0];
            @base.Show();
         }
-
-        //private void buttonAdd_Click(object sender, EventArgs e)
-        //{
-        //    table = listBoxSelect.SelectedItem.ToString(); 
-        //}
     }
 }

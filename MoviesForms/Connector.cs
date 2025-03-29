@@ -41,5 +41,16 @@ namespace MoviesForms
             adapter.Fill(dataSet);
             return dataSet;
         }
+        public DataSet Insert(DataSet dataSet, string select)
+        {
+            connection.Open();
+            SqlDataAdapter adapter = new SqlDataAdapter(select, connection);
+            SqlCommandBuilder builder = new SqlCommandBuilder(adapter);
+            adapter.Update(dataSet);
+            connection.Close();
+            dataSet.Clear();
+            adapter.Fill(dataSet);
+            return dataSet;
+        }
     }
 }
