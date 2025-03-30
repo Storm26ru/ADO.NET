@@ -1,7 +1,7 @@
 ﻿
 namespace MoviesForms
 {
-    partial class Base
+    partial class TableForm
     {
         /// <summary>
         /// Required designer variable.
@@ -51,7 +51,7 @@ namespace MoviesForms
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.dataGridView1);
             this.Name = "Base";
-            this.Text = "Form1";
+            this.Text = "Table";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 

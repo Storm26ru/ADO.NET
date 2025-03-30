@@ -21,7 +21,7 @@ namespace MoviesForms
         private void buttonExecute_Click(object sender, EventArgs e)
         {
            Connector connector = new Connector();
-           Base @base = new Base();
+           TableForm @base = new TableForm();
            @base.dataGridView.DataSource = connector.Select(textBoxQuery.Text).Tables[0];
            @base.Show();
         }

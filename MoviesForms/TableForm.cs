@@ -10,10 +10,10 @@ using System.Windows.Forms;
 
 namespace MoviesForms
 {
-    public partial class Base : Form
+    public partial class TableForm : Form
     {
         public DataGridView dataGridView { get => dataGridView1; set => dataGridView1.DataSource = value; }
-        public Base()
+        public TableForm()
         {
             InitializeComponent();
           // Connector connector = new Connector();

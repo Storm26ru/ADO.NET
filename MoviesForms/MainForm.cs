@@ -16,22 +16,7 @@ namespace MoviesForms
         public MainForm()
         {
             InitializeComponent();
-           // data_initialization(comboBoxBases.SelectedItem.)
-            //Connector.@base = "VPD_311_Import";
-            //connector = new Connector();
-            //DataSet dataSet = connector.Select("TABLE_NAME", "INFORMATION_SCHEMA.TABLES");
-            //DataTable dt = dataSet.Tables[0];
-            //TreeNode[] treeNode = new TreeNode [dt.Rows.Count];    
-            //   for(int i =0; i<dt.Rows.Count; i++ )
-            //    {
-            //        treeNode[i] = new TreeNode(dt.Rows[i].ItemArray[0].ToString());
-            //        foreach (DataTable dataTable in connector.Select("*", treeNode[i].Text).Tables)
-            //        {
-            //            foreach (DataColumn dataColumn in dataTable.Columns) treeNode[i].Nodes.Add(new TreeNode(dataColumn.ColumnName));
-            //        }
-            //        treeView1.Nodes.Add(treeNode[i]);
-            //    }
-         }
+        }
         void data_initialization(string base_string)
         {
             Connector.@base = base_string;
