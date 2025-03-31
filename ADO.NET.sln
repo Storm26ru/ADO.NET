@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoviesConnector", "MoviesCo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoviesForms", "MoviesForms\MoviesForms.csproj", "{5AC40273-401D-4259-99DE-F69C9C139540}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Academy", "Academy\Academy.csproj", "{C8FB0241-33FA-43D5-8283-02E89AA25CE6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{5AC40273-401D-4259-99DE-F69C9C139540}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5AC40273-401D-4259-99DE-F69C9C139540}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5AC40273-401D-4259-99DE-F69C9C139540}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8FB0241-33FA-43D5-8283-02E89AA25CE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8FB0241-33FA-43D5-8283-02E89AA25CE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8FB0241-33FA-43D5-8283-02E89AA25CE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8FB0241-33FA-43D5-8283-02E89AA25CE6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
