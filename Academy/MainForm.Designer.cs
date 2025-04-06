@@ -30,29 +30,38 @@ namespace Academy
         private void InitializeComponent()
         {
             this.statusStrip = new System.Windows.Forms.StatusStrip();
+            this.statusStripCountLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPageStudents = new System.Windows.Forms.TabPage();
-            this.tabPageGroups = new System.Windows.Forms.TabPage();
-            this.tabPageDirections = new System.Windows.Forms.TabPage();
-            this.tabPageDisciplines = new System.Windows.Forms.TabPage();
-            this.tabPageTeachers = new System.Windows.Forms.TabPage();
+            this.label3 = new System.Windows.Forms.Label();
+            this.cmbStudentsGroups = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.cmbStudentsDirections = new System.Windows.Forms.ComboBox();
             this.dgvStudents = new System.Windows.Forms.DataGridView();
+            this.tabPageGroups = new System.Windows.Forms.TabPage();
+            this.btnEdit = new System.Windows.Forms.Button();
+            this.checkBoxGroups = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.comboBoxDirection = new System.Windows.Forms.ComboBox();
             this.dgvGroups = new System.Windows.Forms.DataGridView();
+            this.tabPageDirections = new System.Windows.Forms.TabPage();
+            this.chbEmptyDirections = new System.Windows.Forms.CheckBox();
             this.dgvDirections = new System.Windows.Forms.DataGridView();
+            this.tabPageDisciplines = new System.Windows.Forms.TabPage();
             this.dgvDiscoplines = new System.Windows.Forms.DataGridView();
+            this.tabPageTeachers = new System.Windows.Forms.TabPage();
             this.dgvTeachers = new System.Windows.Forms.DataGridView();
-            this.statusStripCountLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.statusStrip.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabPageStudents.SuspendLayout();
-            this.tabPageGroups.SuspendLayout();
-            this.tabPageDirections.SuspendLayout();
-            this.tabPageDisciplines.SuspendLayout();
-            this.tabPageTeachers.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStudents)).BeginInit();
+            this.tabPageGroups.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGroups)).BeginInit();
+            this.tabPageDirections.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDirections)).BeginInit();
+            this.tabPageDisciplines.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDiscoplines)).BeginInit();
+            this.tabPageTeachers.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvTeachers)).BeginInit();
             this.SuspendLayout();
             // 
@@ -65,6 +74,12 @@ namespace Academy
             this.statusStrip.Size = new System.Drawing.Size(800, 22);
             this.statusStrip.TabIndex = 0;
             this.statusStrip.Text = "statusStrip";
+            // 
+            // statusStripCountLabel
+            // 
+            this.statusStripCountLabel.Name = "statusStripCountLabel";
+            this.statusStripCountLabel.Size = new System.Drawing.Size(95, 17);
+            this.statusStripCountLabel.Text = "statusStripCount";
             // 
             // tabControl
             // 
@@ -79,9 +94,14 @@ namespace Academy
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(800, 428);
             this.tabControl.TabIndex = 1;
+            this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
             // 
             // tabPageStudents
             // 
+            this.tabPageStudents.Controls.Add(this.label3);
+            this.tabPageStudents.Controls.Add(this.cmbStudentsGroups);
+            this.tabPageStudents.Controls.Add(this.label2);
+            this.tabPageStudents.Controls.Add(this.cmbStudentsDirections);
             this.tabPageStudents.Controls.Add(this.dgvStudents);
             this.tabPageStudents.Location = new System.Drawing.Point(4, 22);
             this.tabPageStudents.Name = "tabPageStudents";
@@ -91,49 +111,41 @@ namespace Academy
             this.tabPageStudents.Text = "Students";
             this.tabPageStudents.UseVisualStyleBackColor = true;
             // 
-            // tabPageGroups
+            // label3
             // 
-            this.tabPageGroups.Controls.Add(this.dgvGroups);
-            this.tabPageGroups.Location = new System.Drawing.Point(4, 22);
-            this.tabPageGroups.Name = "tabPageGroups";
-            this.tabPageGroups.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageGroups.Size = new System.Drawing.Size(792, 402);
-            this.tabPageGroups.TabIndex = 1;
-            this.tabPageGroups.Text = "Groups";
-            this.tabPageGroups.UseVisualStyleBackColor = true;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(438, 15);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(36, 13);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Group";
             // 
-            // tabPageDirections
+            // cmbStudentsGroups
             // 
-            this.tabPageDirections.Controls.Add(this.dgvDirections);
-            this.tabPageDirections.Location = new System.Drawing.Point(4, 22);
-            this.tabPageDirections.Name = "tabPageDirections";
-            this.tabPageDirections.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageDirections.Size = new System.Drawing.Size(792, 402);
-            this.tabPageDirections.TabIndex = 2;
-            this.tabPageDirections.Text = "Directions";
-            this.tabPageDirections.UseVisualStyleBackColor = true;
+            this.cmbStudentsGroups.FormattingEnabled = true;
+            this.cmbStudentsGroups.Location = new System.Drawing.Point(491, 12);
+            this.cmbStudentsGroups.Name = "cmbStudentsGroups";
+            this.cmbStudentsGroups.Size = new System.Drawing.Size(265, 21);
+            this.cmbStudentsGroups.TabIndex = 5;
+            this.cmbStudentsGroups.SelectedIndexChanged += new System.EventHandler(this.cmbStudentsGroups_SelectedIndexChanged);
             // 
-            // tabPageDisciplines
+            // label2
             // 
-            this.tabPageDisciplines.Controls.Add(this.dgvDiscoplines);
-            this.tabPageDisciplines.Location = new System.Drawing.Point(4, 22);
-            this.tabPageDisciplines.Name = "tabPageDisciplines";
-            this.tabPageDisciplines.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageDisciplines.Size = new System.Drawing.Size(792, 402);
-            this.tabPageDisciplines.TabIndex = 3;
-            this.tabPageDisciplines.Text = "Disciplines";
-            this.tabPageDisciplines.UseVisualStyleBackColor = true;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(29, 15);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(49, 13);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Direction";
             // 
-            // tabPageTeachers
+            // cmbStudentsDirections
             // 
-            this.tabPageTeachers.Controls.Add(this.dgvTeachers);
-            this.tabPageTeachers.Location = new System.Drawing.Point(4, 22);
-            this.tabPageTeachers.Name = "tabPageTeachers";
-            this.tabPageTeachers.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageTeachers.Size = new System.Drawing.Size(792, 402);
-            this.tabPageTeachers.TabIndex = 4;
-            this.tabPageTeachers.Text = "Teachers";
-            this.tabPageTeachers.UseVisualStyleBackColor = true;
+            this.cmbStudentsDirections.FormattingEnabled = true;
+            this.cmbStudentsDirections.Location = new System.Drawing.Point(82, 12);
+            this.cmbStudentsDirections.Name = "cmbStudentsDirections";
+            this.cmbStudentsDirections.Size = new System.Drawing.Size(265, 21);
+            this.cmbStudentsDirections.TabIndex = 3;
+            this.cmbStudentsDirections.SelectedIndexChanged += new System.EventHandler(this.cmbStudentsDirections_SelectedIndexChanged);
             // 
             // dgvStudents
             // 
@@ -147,6 +159,60 @@ namespace Academy
             this.dgvStudents.Size = new System.Drawing.Size(800, 353);
             this.dgvStudents.TabIndex = 0;
             // 
+            // tabPageGroups
+            // 
+            this.tabPageGroups.Controls.Add(this.btnEdit);
+            this.tabPageGroups.Controls.Add(this.checkBoxGroups);
+            this.tabPageGroups.Controls.Add(this.label1);
+            this.tabPageGroups.Controls.Add(this.comboBoxDirection);
+            this.tabPageGroups.Controls.Add(this.dgvGroups);
+            this.tabPageGroups.Location = new System.Drawing.Point(4, 22);
+            this.tabPageGroups.Name = "tabPageGroups";
+            this.tabPageGroups.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageGroups.Size = new System.Drawing.Size(792, 402);
+            this.tabPageGroups.TabIndex = 1;
+            this.tabPageGroups.Text = "Groups";
+            this.tabPageGroups.UseVisualStyleBackColor = true;
+            // 
+            // btnEdit
+            // 
+            this.btnEdit.Location = new System.Drawing.Point(652, 11);
+            this.btnEdit.Name = "btnEdit";
+            this.btnEdit.Size = new System.Drawing.Size(105, 23);
+            this.btnEdit.TabIndex = 4;
+            this.btnEdit.Text = "Edit";
+            this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+            // 
+            // checkBoxGroups
+            // 
+            this.checkBoxGroups.AutoSize = true;
+            this.checkBoxGroups.Location = new System.Drawing.Point(383, 15);
+            this.checkBoxGroups.Name = "checkBoxGroups";
+            this.checkBoxGroups.Size = new System.Drawing.Size(90, 17);
+            this.checkBoxGroups.TabIndex = 3;
+            this.checkBoxGroups.Text = "Empty groups";
+            this.checkBoxGroups.UseVisualStyleBackColor = true;
+            this.checkBoxGroups.CheckedChanged += new System.EventHandler(this.checkBoxGroups_CheckedChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(24, 15);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(49, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Direction";
+            // 
+            // comboBoxDirection
+            // 
+            this.comboBoxDirection.FormattingEnabled = true;
+            this.comboBoxDirection.Location = new System.Drawing.Point(77, 12);
+            this.comboBoxDirection.Name = "comboBoxDirection";
+            this.comboBoxDirection.Size = new System.Drawing.Size(265, 21);
+            this.comboBoxDirection.TabIndex = 1;
+            this.comboBoxDirection.SelectedIndexChanged += new System.EventHandler(this.comboBoxDirection_SelectedIndexChanged);
+            // 
             // dgvGroups
             // 
             this.dgvGroups.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -158,6 +224,29 @@ namespace Academy
             this.dgvGroups.Name = "dgvGroups";
             this.dgvGroups.Size = new System.Drawing.Size(800, 363);
             this.dgvGroups.TabIndex = 0;
+            // 
+            // tabPageDirections
+            // 
+            this.tabPageDirections.Controls.Add(this.chbEmptyDirections);
+            this.tabPageDirections.Controls.Add(this.dgvDirections);
+            this.tabPageDirections.Location = new System.Drawing.Point(4, 22);
+            this.tabPageDirections.Name = "tabPageDirections";
+            this.tabPageDirections.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageDirections.Size = new System.Drawing.Size(792, 402);
+            this.tabPageDirections.TabIndex = 2;
+            this.tabPageDirections.Text = "Directions";
+            this.tabPageDirections.UseVisualStyleBackColor = true;
+            // 
+            // chbEmptyDirections
+            // 
+            this.chbEmptyDirections.AutoSize = true;
+            this.chbEmptyDirections.Location = new System.Drawing.Point(20, 14);
+            this.chbEmptyDirections.Name = "chbEmptyDirections";
+            this.chbEmptyDirections.Size = new System.Drawing.Size(103, 17);
+            this.chbEmptyDirections.TabIndex = 1;
+            this.chbEmptyDirections.Text = "Empty directions";
+            this.chbEmptyDirections.UseVisualStyleBackColor = true;
+            this.chbEmptyDirections.CheckedChanged += new System.EventHandler(this.chbEmptyDirections_CheckedChanged);
             // 
             // dgvDirections
             // 
@@ -171,6 +260,17 @@ namespace Academy
             this.dgvDirections.Size = new System.Drawing.Size(800, 363);
             this.dgvDirections.TabIndex = 0;
             // 
+            // tabPageDisciplines
+            // 
+            this.tabPageDisciplines.Controls.Add(this.dgvDiscoplines);
+            this.tabPageDisciplines.Location = new System.Drawing.Point(4, 22);
+            this.tabPageDisciplines.Name = "tabPageDisciplines";
+            this.tabPageDisciplines.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageDisciplines.Size = new System.Drawing.Size(792, 402);
+            this.tabPageDisciplines.TabIndex = 3;
+            this.tabPageDisciplines.Text = "Disciplines";
+            this.tabPageDisciplines.UseVisualStyleBackColor = true;
+            // 
             // dgvDiscoplines
             // 
             this.dgvDiscoplines.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -183,6 +283,17 @@ namespace Academy
             this.dgvDiscoplines.Size = new System.Drawing.Size(800, 363);
             this.dgvDiscoplines.TabIndex = 0;
             // 
+            // tabPageTeachers
+            // 
+            this.tabPageTeachers.Controls.Add(this.dgvTeachers);
+            this.tabPageTeachers.Location = new System.Drawing.Point(4, 22);
+            this.tabPageTeachers.Name = "tabPageTeachers";
+            this.tabPageTeachers.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageTeachers.Size = new System.Drawing.Size(792, 402);
+            this.tabPageTeachers.TabIndex = 4;
+            this.tabPageTeachers.Text = "Teachers";
+            this.tabPageTeachers.UseVisualStyleBackColor = true;
+            // 
             // dgvTeachers
             // 
             this.dgvTeachers.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -194,12 +305,6 @@ namespace Academy
             this.dgvTeachers.Name = "dgvTeachers";
             this.dgvTeachers.Size = new System.Drawing.Size(800, 363);
             this.dgvTeachers.TabIndex = 0;
-            // 
-            // statusStripCountLabel
-            // 
-            this.statusStripCountLabel.Name = "statusStripCountLabel";
-            this.statusStripCountLabel.Size = new System.Drawing.Size(95, 17);
-            this.statusStripCountLabel.Text = "statusStripCount";
             // 
             // MainForm
             // 
@@ -214,14 +319,17 @@ namespace Academy
             this.statusStrip.PerformLayout();
             this.tabControl.ResumeLayout(false);
             this.tabPageStudents.ResumeLayout(false);
-            this.tabPageGroups.ResumeLayout(false);
-            this.tabPageDirections.ResumeLayout(false);
-            this.tabPageDisciplines.ResumeLayout(false);
-            this.tabPageTeachers.ResumeLayout(false);
+            this.tabPageStudents.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStudents)).EndInit();
+            this.tabPageGroups.ResumeLayout(false);
+            this.tabPageGroups.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGroups)).EndInit();
+            this.tabPageDirections.ResumeLayout(false);
+            this.tabPageDirections.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDirections)).EndInit();
+            this.tabPageDisciplines.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDiscoplines)).EndInit();
+            this.tabPageTeachers.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvTeachers)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -243,6 +351,15 @@ namespace Academy
         private System.Windows.Forms.DataGridView dgvDiscoplines;
         private System.Windows.Forms.DataGridView dgvTeachers;
         private System.Windows.Forms.ToolStripStatusLabel statusStripCountLabel;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox comboBoxDirection;
+        private System.Windows.Forms.CheckBox checkBoxGroups;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox cmbStudentsGroups;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox cmbStudentsDirections;
+        private System.Windows.Forms.CheckBox chbEmptyDirections;
+        private System.Windows.Forms.Button btnEdit;
     }
 }
 

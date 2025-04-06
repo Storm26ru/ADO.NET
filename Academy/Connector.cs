@@ -23,11 +23,12 @@ namespace Academy
             AllocConsole();
             Console.WriteLine(CONNECTION_STRING);
         }
-        public DataTable Select(string columns, string tables, string condition ="")
+        public DataTable Select(string columns, string tables, string condition ="",string group_by = "")
         {
             DataTable table = null;
             string cmd = $"SELECT {columns} FROM {tables}";
             if (condition != "") cmd += $" WHERE {condition}";
+            if (group_by != "") cmd += $" GROUP BY {group_by}";
             SqlCommand command = new SqlCommand(cmd, connection);
             connection.Open();
             SqlDataReader reader = command.ExecuteReader();
@@ -45,6 +46,29 @@ namespace Academy
             reader.Close();
             connection.Close();
             return table;
+        }
+        public void Insert(DataTable dataTable,string table,string test_condition)
+        {
+            string condition = "";
+            string columns = "";
+            string values = "";
+            foreach (DataColumn column in dataTable.Columns)
+            { 
+                columns += column.Ordinal != 0 ? $", {column.ColumnName}" : $"{column.ColumnName}";
+                if (column.ColumnName == test_condition) condition = $"{test_condition} = '{dataTable.Rows[0].ItemArray[column.Ordinal].ToString()}'";
+            }        
+            for(int i =0; i<dataTable.Columns.Count; i++)
+            {
+                values += i != 0 ? $", '{dataTable.Rows[0].ItemArray[i].ToString()}'" : $"'{dataTable.Rows[0].ItemArray[i].ToString()}'";
+            }
+            string verification = $"IF NOT EXISTS (SELECT * FROM {table} WHERE {condition})";
+            string query = $"INSERT {table} ({columns}) VALUES ({values})";
+            string cmd = $"{verification} BEGIN {query} END";
+            Console.WriteLine(cmd);
+            SqlCommand command = new SqlCommand(cmd, connection);
+            connection.Open();
+            command.ExecuteNonQuery();
+            connection.Close();
         }
         [DllImport("kernel32.dll")]
         public static extern bool AllocConsole();
