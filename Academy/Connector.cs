@@ -52,10 +52,15 @@ namespace Academy
             string condition = "";
             string columns = "";
             string values = "";
+            string[] condition_test = test_condition.Split(',').ToArray();
             foreach (DataColumn column in dataTable.Columns)
             { 
                 columns += column.Ordinal != 0 ? $", {column.ColumnName}" : $"{column.ColumnName}";
-                if (column.ColumnName == test_condition) condition = $"{test_condition} = '{dataTable.Rows[0].ItemArray[column.Ordinal].ToString()}'";
+               // if (column.ColumnName == test_condition) condition = $"{test_condition} = '{dataTable.Rows[0].ItemArray[column.Ordinal].ToString()}'";
+                for (int i = 0; i < condition_test.Length; i++)
+                    if (column.ColumnName == condition_test[i])
+                        condition += i != 0 ? $", {condition_test[i]} = '{dataTable.Rows[0].ItemArray[column.Ordinal].ToString()}'" :
+                                              $"{condition_test[i]} = '{dataTable.Rows[0].ItemArray[column.Ordinal].ToString()}'";
             }        
             for(int i =0; i<dataTable.Columns.Count; i++)
             {
