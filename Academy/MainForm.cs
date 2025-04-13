@@ -122,7 +122,8 @@ namespace Academy
                     }
                 }
             }
-            if (cb_parent.ContainsKey(sender as ComboBox)) query = cbQuery(cb_parent[sender as ComboBox],query);
+            if (cb_parent.ContainsKey(sender as ComboBox)&& cb_parent[sender as ComboBox].SelectedIndex>=0)
+                query = cbQuery(cb_parent[sender as ComboBox],query);
             return query;
         }
         private void ComboBox_SelectedIndexChanged(object sender, EventArgs e)
