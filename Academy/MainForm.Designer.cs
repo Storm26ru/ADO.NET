@@ -34,15 +34,13 @@ namespace Academy
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabPageStudents = new System.Windows.Forms.TabPage();
             this.label3 = new System.Windows.Forms.Label();
-            this.cmbStudentsGroups = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.cmbStudentsDirections = new System.Windows.Forms.ComboBox();
+            this.cbStudentsDirections = new System.Windows.Forms.ComboBox();
             this.dgvStudents = new System.Windows.Forms.DataGridView();
             this.tabPageGroups = new System.Windows.Forms.TabPage();
             this.btnEdit = new System.Windows.Forms.Button();
-            this.checkBoxGroups = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.comboBoxDirection = new System.Windows.Forms.ComboBox();
+            this.cbGroupsDirections = new System.Windows.Forms.ComboBox();
             this.dgvGroups = new System.Windows.Forms.DataGridView();
             this.tabPageDirections = new System.Windows.Forms.TabPage();
             this.chbEmptyDirections = new System.Windows.Forms.CheckBox();
@@ -51,6 +49,7 @@ namespace Academy
             this.dgvDiscoplines = new System.Windows.Forms.DataGridView();
             this.tabPageTeachers = new System.Windows.Forms.TabPage();
             this.dgvTeachers = new System.Windows.Forms.DataGridView();
+            this.cbStudentsGroups = new System.Windows.Forms.ComboBox();
             this.statusStrip.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabPageStudents.SuspendLayout();
@@ -98,10 +97,10 @@ namespace Academy
             // 
             // tabPageStudents
             // 
+            this.tabPageStudents.Controls.Add(this.cbStudentsGroups);
             this.tabPageStudents.Controls.Add(this.label3);
-            this.tabPageStudents.Controls.Add(this.cmbStudentsGroups);
             this.tabPageStudents.Controls.Add(this.label2);
-            this.tabPageStudents.Controls.Add(this.cmbStudentsDirections);
+            this.tabPageStudents.Controls.Add(this.cbStudentsDirections);
             this.tabPageStudents.Controls.Add(this.dgvStudents);
             this.tabPageStudents.Location = new System.Drawing.Point(4, 22);
             this.tabPageStudents.Name = "tabPageStudents";
@@ -120,15 +119,6 @@ namespace Academy
             this.label3.TabIndex = 6;
             this.label3.Text = "Group";
             // 
-            // cmbStudentsGroups
-            // 
-            this.cmbStudentsGroups.FormattingEnabled = true;
-            this.cmbStudentsGroups.Location = new System.Drawing.Point(491, 12);
-            this.cmbStudentsGroups.Name = "cmbStudentsGroups";
-            this.cmbStudentsGroups.Size = new System.Drawing.Size(265, 21);
-            this.cmbStudentsGroups.TabIndex = 5;
-            this.cmbStudentsGroups.SelectedIndexChanged += new System.EventHandler(this.cmbStudentsGroups_SelectedIndexChanged);
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -138,14 +128,15 @@ namespace Academy
             this.label2.TabIndex = 4;
             this.label2.Text = "Direction";
             // 
-            // cmbStudentsDirections
+            // cbStudentsDirections
             // 
-            this.cmbStudentsDirections.FormattingEnabled = true;
-            this.cmbStudentsDirections.Location = new System.Drawing.Point(82, 12);
-            this.cmbStudentsDirections.Name = "cmbStudentsDirections";
-            this.cmbStudentsDirections.Size = new System.Drawing.Size(265, 21);
-            this.cmbStudentsDirections.TabIndex = 3;
-            this.cmbStudentsDirections.SelectedIndexChanged += new System.EventHandler(this.cmbStudentsDirections_SelectedIndexChanged);
+            this.cbStudentsDirections.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbStudentsDirections.FormattingEnabled = true;
+            this.cbStudentsDirections.Location = new System.Drawing.Point(82, 12);
+            this.cbStudentsDirections.Name = "cbStudentsDirections";
+            this.cbStudentsDirections.Size = new System.Drawing.Size(265, 21);
+            this.cbStudentsDirections.TabIndex = 3;
+            this.cbStudentsDirections.SelectedIndexChanged += new System.EventHandler(this.ComboBox_SelectedIndexChanged);
             // 
             // dgvStudents
             // 
@@ -162,9 +153,8 @@ namespace Academy
             // tabPageGroups
             // 
             this.tabPageGroups.Controls.Add(this.btnEdit);
-            this.tabPageGroups.Controls.Add(this.checkBoxGroups);
             this.tabPageGroups.Controls.Add(this.label1);
-            this.tabPageGroups.Controls.Add(this.comboBoxDirection);
+            this.tabPageGroups.Controls.Add(this.cbGroupsDirections);
             this.tabPageGroups.Controls.Add(this.dgvGroups);
             this.tabPageGroups.Location = new System.Drawing.Point(4, 22);
             this.tabPageGroups.Name = "tabPageGroups";
@@ -184,17 +174,6 @@ namespace Academy
             this.btnEdit.UseVisualStyleBackColor = true;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
-            // checkBoxGroups
-            // 
-            this.checkBoxGroups.AutoSize = true;
-            this.checkBoxGroups.Location = new System.Drawing.Point(383, 15);
-            this.checkBoxGroups.Name = "checkBoxGroups";
-            this.checkBoxGroups.Size = new System.Drawing.Size(90, 17);
-            this.checkBoxGroups.TabIndex = 3;
-            this.checkBoxGroups.Text = "Empty groups";
-            this.checkBoxGroups.UseVisualStyleBackColor = true;
-            this.checkBoxGroups.CheckedChanged += new System.EventHandler(this.checkBoxGroups_CheckedChanged);
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -204,14 +183,15 @@ namespace Academy
             this.label1.TabIndex = 2;
             this.label1.Text = "Direction";
             // 
-            // comboBoxDirection
+            // cbGroupsDirections
             // 
-            this.comboBoxDirection.FormattingEnabled = true;
-            this.comboBoxDirection.Location = new System.Drawing.Point(77, 12);
-            this.comboBoxDirection.Name = "comboBoxDirection";
-            this.comboBoxDirection.Size = new System.Drawing.Size(265, 21);
-            this.comboBoxDirection.TabIndex = 1;
-            this.comboBoxDirection.SelectedIndexChanged += new System.EventHandler(this.comboBoxDirection_SelectedIndexChanged);
+            this.cbGroupsDirections.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbGroupsDirections.FormattingEnabled = true;
+            this.cbGroupsDirections.Location = new System.Drawing.Point(77, 12);
+            this.cbGroupsDirections.Name = "cbGroupsDirections";
+            this.cbGroupsDirections.Size = new System.Drawing.Size(265, 21);
+            this.cbGroupsDirections.TabIndex = 1;
+            this.cbGroupsDirections.SelectedIndexChanged += new System.EventHandler(this.ComboBox_SelectedIndexChanged);
             // 
             // dgvGroups
             // 
@@ -306,6 +286,15 @@ namespace Academy
             this.dgvTeachers.Size = new System.Drawing.Size(800, 363);
             this.dgvTeachers.TabIndex = 0;
             // 
+            // cbStudentsGroups
+            // 
+            this.cbStudentsGroups.FormattingEnabled = true;
+            this.cbStudentsGroups.Location = new System.Drawing.Point(481, 12);
+            this.cbStudentsGroups.Name = "cbStudentsGroups";
+            this.cbStudentsGroups.Size = new System.Drawing.Size(270, 21);
+            this.cbStudentsGroups.TabIndex = 7;
+            this.cbStudentsGroups.SelectedIndexChanged += new System.EventHandler(this.ComboBox_SelectedIndexChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -352,14 +341,13 @@ namespace Academy
         private System.Windows.Forms.DataGridView dgvTeachers;
         private System.Windows.Forms.ToolStripStatusLabel statusStripCountLabel;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox comboBoxDirection;
-        private System.Windows.Forms.CheckBox checkBoxGroups;
+        private System.Windows.Forms.ComboBox cbGroupsDirections;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox cmbStudentsGroups;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox cmbStudentsDirections;
+        private System.Windows.Forms.ComboBox cbStudentsDirections;
         private System.Windows.Forms.CheckBox chbEmptyDirections;
         private System.Windows.Forms.Button btnEdit;
+        private System.Windows.Forms.ComboBox cbStudentsGroups;
     }
 }
 

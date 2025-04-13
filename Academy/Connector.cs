@@ -75,6 +75,30 @@ namespace Academy
             command.ExecuteNonQuery();
             connection.Close();
         }
+        public Dictionary<string,int> GetDictionary(string table,string table_parent="", string condition = "")
+        {
+            Dictionary<string, int> dictionary=null;
+
+            string id_column = table.ToLower().Remove(table.Length-1) + "_id";
+            string name_column = table.ToLower().Remove(table.Length-1) + "_name";
+            string cmd = $"SELECT {name_column}, {id_column} FROM {table}";
+            if (condition != "") cmd += $",{table_parent} WHERE {table_parent.Remove(table_parent.Length-1).ToLower()} = {table_parent.Remove(table_parent.Length - 1).ToLower()}_id AND {condition}";
+            Console.WriteLine(cmd);
+            SqlCommand command = new SqlCommand(cmd, connection);
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+            if (reader.HasRows)
+            {
+                dictionary = new Dictionary<string, int>();
+                while(reader.Read())
+                {
+                    dictionary[reader[0].ToString()] =Convert.ToInt32(reader[1]);
+                }
+            }
+            reader.Close();
+            connection.Close();
+            return dictionary;
+        }
         [DllImport("kernel32.dll")]
         public static extern bool AllocConsole();
         [DllImport("kernel32.dll")]

@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Configuration;
+using System.Reflection;
+using System.Collections.ObjectModel;
 
 namespace Academy
 {
@@ -37,6 +39,12 @@ namespace Academy
             "Кличество преподавателей: ",
         };
 
+        Dictionary<string, int> d_directions;
+        public ReadOnlyDictionary<string, int> rod_directions { get => new ReadOnlyDictionary<string, int>(d_directions); }
+        Dictionary<string, int> d_groups;
+        public ReadOnlyDictionary<string, int> rod_groups { get => new ReadOnlyDictionary<string, int>(d_groups); }
+        Dictionary<ComboBox, ComboBox> cb_parent;
+        
         public MainForm()
         {
             InitializeComponent();
@@ -52,108 +60,76 @@ namespace Academy
             dgvStudents.DataSource = connector.Select("stud_id,last_name,first_name,middle_name,birth_date,group_name,direction_name",
                                                       "Students JOIN Groups ON [group]=group_id JOIN Directions ON direction=direction_id");
             statusStripCountLabel.Text = $"Колличество студетов: {dgvStudents.RowCount - 1}";
-            comboBoxDirection.Items.AddRange(AddItems("DISTINCT direction_name", "Groups,Directions", "direction=direction_id"));
-            comboBoxDirection.Items.Insert(0, "All");
-            cmbStudentsDirections.Items.AddRange(AddItems("DISTINCT direction_name", "Students,Groups,Directions",
-                                                          "[group]=group_id AND direction=direction_id "));
-            cmbStudentsDirections.Items.Insert(0, "All");
-            cmbStudentsGroups.Items.AddRange(AddItems("DISTINCT group_name", "Students,Groups","[group]=group_id"));
-            cmbStudentsGroups.Items.Insert(0, "All");
+            d_directions = connector.GetDictionary("Directions");
+            d_groups = connector.GetDictionary("Groups");
+            cbGroupsDirections.Items.AddRange(d_directions.Select(d => d.Key).ToArray());
+            cbStudentsDirections.Items.AddRange(d_directions.Select(d => d.Key).ToArray());
+            cbStudentsGroups.Items.AddRange(d_groups.Select(d => d.Key).ToArray());
+            cb_parent = new Dictionary<ComboBox,ComboBox>();
+            cb_parent.Add(cbStudentsGroups, cbStudentsDirections);
+          
+            
+        }
+       
+        void LoadTab(Query query = null)
+        {
+            int i = tabControl.SelectedIndex;
+            if (query == null) query = queries[i];
+            tables[i].DataSource = connector.Select(query.Column, query.Table, query.Condition, query.GroupBy);
+            statusStripCountLabel.Text = $"{status_messages[i]}{tables[i].RowCount - 1}";
+
         }
 
         private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
-            // if (checkBoxGroups.Checked) return;
-            int i = tabControl.SelectedIndex;
-            tables[i].DataSource = connector.Select(queries[i].Column, queries[i].Table, queries[i].Condition, queries[i].GroupBy);
-            statusStripCountLabel.Text = $"{status_messages[i]}{tables[i].RowCount - 1}";
-            //if (tabControl.SelectedTab.Text == "Groups")
-            //{
-            //    //for(int j = 0; j<tables[i].RowCount-1;j++)
-            //    //{
-            //    //    for(int k=0; k<tables[i].Columns.Count;k++)
-            //    //    {
-            //    //        if(tables[i].Rows[j].Cells[k].OwningColumn.Name == "direction_name")
-            //    //        {
-            //    //             if(comboBoxDirection.FindString(tables[i].Rows[j].Cells[k].Value.ToString())<0)
-            //    //            comboBoxDirection.Items.Add(tables[i].Rows[j].Cells[k].Value);
-            //    //        }
-            //    //    }
-            //    //}
-            //    //DataTable dataTable = connector.Select("DISTINCT direction_name", "Groups,Directions", "direction=direction_id");
-            //    //foreach (DataRow row in dataTable.Rows)
-            //    //{
-            //    //    foreach (object cell in row.ItemArray) comboBoxDirection.Items.Add(cell);
-            //    //}
-            //}
+            LoadTab();
         }
-        string[] AddItems(string colunmn,string table,string condition)
-        {
-            DataTable dataTable = connector.Select(colunmn, table, condition);
-            string[] items = new string[dataTable.Rows.Count];
-            for (int i = 0; i < items.Length; i++) foreach (object cell in dataTable.Rows[i].ItemArray) items[i] = cell.ToString();
-            return items;
-        }
-
-        private void checkBoxGroups_CheckedChanged(object sender, EventArgs e)
-        {
-            string condition = "";
-            int i = tabControl.SelectedIndex;
-            if (comboBoxDirection.SelectedIndex>0) condition =$"direction_name='{comboBoxDirection.Text}'";
-            if (checkBoxGroups.Checked)
-                dgvGroups.DataSource = connector.Select("group_id, group_name, direction_name, COUNT(stud_id) AS N'Student population'",
-                                                        "Groups LEFT JOIN Students ON[group] = group_id JOIN Directions ON direction = direction_id",
-                                                        condition, "group_id, group_name, direction_name");
-            else comboBoxDirection_SelectedIndexChanged(sender, e);
-            statusStripCountLabel.Text = $"{status_messages[i]}{tables[i].RowCount - 1}";
-        }
-
-        private void comboBoxDirection_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int i = tabControl.SelectedIndex;
-            string condition = queries[i].Condition;
-            if (comboBoxDirection.SelectedIndex > 0) condition = $"{queries[i].Condition} AND direction_name='{comboBoxDirection.Text}'";
-            if (checkBoxGroups.Checked) checkBoxGroups_CheckedChanged(sender, e);
-            else dgvGroups.DataSource = connector.Select(queries[i].Column, queries[i].Table,condition, queries[i].GroupBy);
-            statusStripCountLabel.Text = $"{status_messages[i]}{tables[i].RowCount - 1}";
-        }
-
-        private void cmbStudentsDirections_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int i = tabControl.SelectedIndex;
-            string condition ="";
-            if (cmbStudentsDirections.SelectedIndex > 0) condition = $"direction_name='{cmbStudentsDirections.Text}'";
-           // dgvStudents.DataSource = connector.Select(queries[i].Column,queries[i].Table,condition);
-            cmbStudentsGroups.Items.Clear();
-            cmbStudentsGroups.Items.AddRange(AddItems("DISTINCT group_name", queries[i].Table, condition));
-            cmbStudentsGroups.Items.Insert(0, "All");
-            cmbStudentsGroups.SelectedIndex=0;
-        }
-
-        private void cmbStudentsGroups_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            int i = tabControl.SelectedIndex;
-            string condition ="";
-            if (cmbStudentsDirections.SelectedIndex > 0) condition = $"direction_name='{cmbStudentsDirections.Text}'";
-            if (cmbStudentsGroups.SelectedIndex > 0) condition+= cmbStudentsDirections.SelectedIndex > 0 ? $" AND group_name = '{cmbStudentsGroups.Text}'" : 
-                                                                                                           $"group_name = '{cmbStudentsGroups.Text}'";
-            dgvStudents.DataSource = connector.Select(queries[i].Column, queries[i].Table, condition);
-            statusStripCountLabel.Text = $"{status_messages[i]}{tables[i].RowCount - 1}";
-        }
+        
 
         private void chbEmptyDirections_CheckedChanged(object sender, EventArgs e)
         {
-            int i = tabControl.SelectedIndex;
-            if (chbEmptyDirections.Checked)
-                dgvDirections.DataSource = connector.Select(queries[i].Column, "Groups LEFT JOIN Students ON[group] = group_id RIGHT JOIN Directions ON direction = direction_id", "", queries[i].GroupBy);
-            else tabControl_SelectedIndexChanged(sender, e);
-            statusStripCountLabel.Text = $"{status_messages[i]}{tables[i].RowCount - 1}";
+           int i = tabControl.SelectedIndex;
+           if (chbEmptyDirections.Checked)
+               dgvDirections.DataSource = connector.Select(queries[i].Column, "Groups LEFT JOIN Students ON[group] = group_id RIGHT JOIN Directions ON direction = direction_id", "", queries[i].GroupBy);
+           else tabControl_SelectedIndexChanged(sender, e);
+           statusStripCountLabel.Text = $"{status_messages[i]}{tables[i].RowCount - 1}";
         }
-
         private void btnEdit_Click(object sender, EventArgs e)
         {
             formEdit = new FormEditTable(tabControl.SelectedTab.Text.ToString());
             formEdit.Show();
+        }
+
+        Query cbQuery(object sender,Query query)
+        {
+            string tab_name = (sender as ComboBox).Name;
+            string fild_name = tab_name.Substring(Array.FindLastIndex<char>(tab_name.ToCharArray(), Char.IsUpper));//.ToLower();
+            ReadOnlyDictionary<string, int> source = this.GetType().GetProperty($"rod_{fild_name.ToLower()}").GetValue(this) as ReadOnlyDictionary<string, int>;
+            if (query.Condition != "") query.Condition += " AND";
+            query.Condition += $"[{fild_name.Remove(fild_name.Length - 1).ToLower()}] = {source[(sender as ComboBox).SelectedItem.ToString()]}";
+            if(cb_parent.ContainsValue(sender as ComboBox))
+            {
+                foreach(KeyValuePair<ComboBox,ComboBox> keyValuePair in cb_parent )
+                {
+                    if (keyValuePair.Value == (sender as ComboBox))
+                    {
+                        string tab_name_parent = keyValuePair.Key.Name;
+                        string fild_name_parent = tab_name_parent.Substring(Array.FindLastIndex<char>(tab_name_parent.ToCharArray(), Char.IsUpper));
+                        string condition = $"[{fild_name.Remove(fild_name.Length - 1).ToLower()}_id] = {source[(sender as ComboBox).SelectedItem.ToString()]}";
+                        keyValuePair.Key.Items.Clear();
+                        keyValuePair.Key.Items.AddRange(connector.GetDictionary(fild_name_parent, fild_name, condition)
+                            .Select(d => d.Key).ToArray());
+                    }
+                }
+            }
+            if (cb_parent.ContainsKey(sender as ComboBox)) query = cbQuery(cb_parent[sender as ComboBox],query);
+            return query;
+        }
+        private void ComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Query query = new Query(queries[tabControl.SelectedIndex]);
+           query = cbQuery(sender, query);
+            LoadTab(query);
         }
     }
 }

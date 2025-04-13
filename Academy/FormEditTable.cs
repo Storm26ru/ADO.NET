@@ -26,6 +26,10 @@ namespace Academy
             dataTable.NewRow();
             dgvAdd.DataSource = dataTable;
             //dataTable.AcceptChanges();
+            MainForm main = new MainForm();
+            //main.D_directions.Add("ht", 2);
+           //Console.WriteLine(main.D_directions["ht"]);
+            //Console.WriteLine(main.d_directions["Разработка программного обеспечения"]);
 
             
 
