@@ -10,13 +10,15 @@ using System.Windows.Forms;
 using System.Configuration;
 using System.Reflection;
 using System.Collections.ObjectModel;
+using ConnectedMode;
 
 namespace Academy
 {
     public partial class MainForm : Form
     {
         FormEditTable formEdit;
-        Connector connector;
+        ConnectedMode.Connector connector;
+        //Connector connector;
         Query[] queries = new Query[]
         {
             new Query("stud_id,last_name,first_name,middle_name,birth_date,group_name,direction_name",
@@ -56,7 +58,8 @@ namespace Academy
                 dgvDiscoplines,
                 dgvTeachers
             };
-            connector = new Connector(ConfigurationManager.ConnectionStrings["VPD_311_Import"].ConnectionString);
+            connector = new ConnectedMode.Connector(ConfigurationManager.ConnectionStrings["VPD_311_Import"].ConnectionString);
+            //connector = new Connector(ConfigurationManager.ConnectionStrings["VPD_311_Import"].ConnectionString);
             dgvStudents.DataSource = connector.Select("stud_id,last_name,first_name,middle_name,birth_date,group_name,direction_name",
                                                       "Students JOIN Groups ON [group]=group_id JOIN Directions ON direction=direction_id");
             statusStripCountLabel.Text = $"Колличество студетов: {dgvStudents.RowCount - 1}";

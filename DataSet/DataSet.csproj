@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{C8FB0241-33FA-43D5-8283-02E89AA25CE6}</ProjectGuid>
+    <ProjectGuid>{F3E0F1AC-F732-4175-8D09-F3AA8FB6164A}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Academy</RootNamespace>
-    <AssemblyName>Academy</AssemblyName>
+    <RootNamespace>DataSet</RootNamespace>
+    <AssemblyName>DataSet</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -33,8 +33,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ConnectedMode">
-      <HintPath>..\ConnectedMode\bin\Release\ConnectedMode.dll</HintPath>
+    <Reference Include="Cache, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Cache\bin\Release\Cache.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
@@ -50,25 +51,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Connector.cs" />
-    <Compile Include="FormEditTable.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormEditTable.Designer.cs">
-      <DependentUpon>FormEditTable.cs</DependentUpon>
-    </Compile>
-    <Compile Include="MainForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="Cache.cs" />
+    <Compile Include="MainForm.cs" />
     <Compile Include="MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Query.cs" />
-    <EmbeddedResource Include="FormEditTable.resx">
-      <DependentUpon>FormEditTable.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
