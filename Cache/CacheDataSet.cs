@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
 using System.Configuration;
+using System.Threading;
 
 namespace DisconnectedMode
 {
@@ -15,12 +16,17 @@ namespace DisconnectedMode
         readonly string CONNECTION_STRING = "";
         SqlConnection connection = null;
         DataSet set = null;
+        public DataSet Set { get => set; }
+        Timer timer = null;
+        TimerCallback timerCallback = null;
         public CacheDataSet() : this(ConfigurationManager.ConnectionStrings["VPD_311_Import"].ConnectionString) { }
         public CacheDataSet(string connection_strin)
         {
             this.CONNECTION_STRING = connection_strin;
             this.connection = new SqlConnection(CONNECTION_STRING);
             this.set = new DataSet();
+            timerCallback = new TimerCallback(UpdateDataSet);
+            timer = new Timer(timerCallback, null, 0, 10000);
         }
         public void AddTable(string table, string columns)
         {
@@ -33,7 +39,9 @@ namespace DisconnectedMode
             set.Tables[table].PrimaryKey =
                 new DataColumn[] { set.Tables[table].Columns[0] };
             string cmd = $"SELECT {columns} FROM {table}";
+            connection.Open();
             SqlDataAdapter adapter = new SqlDataAdapter(cmd, connection);
+            connection.Close();
             adapter.Fill(set.Tables[table]);
             //Print(table);
         }
@@ -70,6 +78,25 @@ namespace DisconnectedMode
                 Console.WriteLine();
             }
             Console.WriteLine("\n================================================================\n");
+        }
+        public void UpdateDataSet(object obj)
+        {
+            if (set.Tables.Count > 0)
+            {
+                foreach (DataTable table in set.Tables)
+                {
+                    string columns = "";
+                    foreach (DataColumn column in table.Columns)
+                        columns += columns != "" ? $",{column.ColumnName}" : column.ColumnName;
+                    string cmd = $"SELECT {columns} FROM {table.TableName}";
+                    Console.WriteLine(cmd);
+                    connection.Open();
+                    SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd, connection);
+                    connection.Close();
+                    dataAdapter.Fill(set.Tables[table.TableName]);
+                    dataAdapter.Dispose();
+                }
+            }
         }
     }
 }

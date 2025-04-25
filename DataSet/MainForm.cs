@@ -12,32 +12,49 @@ using System.Runtime.InteropServices;
 using System.Data.SqlClient;
 using System.Configuration;
 using DisconnectedMode;
+using System.Threading;
+
 
 
 namespace AcademyDataSet
 {
     public partial class MainForm : Form
     {
-        
+        CacheDataSet cacheDataSet;
         public MainForm()
         {
             InitializeComponent();
             AllocConsole();
-            CacheDataSet cacheDataSet = new CacheDataSet();
+            cacheDataSet = new CacheDataSet();
             cacheDataSet.AddTable("Directions", "direction_id,direction_name");
             cacheDataSet.AddTable("Groups", "group_id,group_name,direction");
             cacheDataSet.AddRelation("GroupsDirections","Groups,direction", "Directions,direction_id");
             cacheDataSet.Print("Groups");
             cacheDataSet.Print("Directions");
-            cbDirection.DataSource = cacheDataSet.GetDataTable("Directions");
+            // cbDirection.DataSource = cacheDataSet.GetDataTable("Directions");
+            cbDirection.DataSource = cacheDataSet.Set.Tables["Directions"];
             cbDirection.DisplayMember = "direction_name";
             cbDirection.ValueMember = "direction_id";
-            cbGroup.DataSource = cacheDataSet.GetDataTable("Groups");
+            //cbGroup.DataSource = cacheDataSet.GetDataTable("Groups");
+            cbGroup.DataSource = cacheDataSet.Set.Tables["Groups"];
             cbGroup.DisplayMember = "group_name";
             cbGroup.ValueMember = "group_id";
             dgvGroup.DataSource = cbGroup.DataSource;
-          
+
         }
+        //public void UpdateData(object obj)
+        //{
+        //   // DataTable table = cbGroup.DataSource as DataTable;
+        //   // table.Clear();
+        //    cacheDataSet.UpdateDataSet();
+        //    //cbDirection.DataSource = null;
+        //    // cbDirection.DataSource = cacheDataSet.GetDataTable("Directions");
+        //    // cbGroup.DataSource = null;
+        //    // cbGroup.DataSource = cacheDataSet.GetDataTable("Groups");
+        //    // dgvGroup.DataSource = null;
+        //    //dgvGroup.DataSource = cbGroup.DataSource;
+        //    cacheDataSet.Print("Groups");
+        //}
         
         [DllImport("kernel32.dll")]
         public static extern bool AllocConsole();
