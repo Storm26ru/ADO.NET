@@ -17,16 +17,16 @@ namespace DisconnectedMode
         SqlConnection connection = null;
         DataSet set = null;
         public DataSet Set { get => set; }
-        Timer timer = null;
         TimerCallback timerCallback = null;
+        System.Threading.Timer timer = null;
         public CacheDataSet() : this(ConfigurationManager.ConnectionStrings["VPD_311_Import"].ConnectionString) { }
         public CacheDataSet(string connection_strin)
         {
             this.CONNECTION_STRING = connection_strin;
             this.connection = new SqlConnection(CONNECTION_STRING);
             this.set = new DataSet();
-            timerCallback = new TimerCallback(UpdateDataSet);
-            timer = new Timer(timerCallback, null, 0, 10000);
+           this.timerCallback = new TimerCallback(UpdateDataSet);
+           this.timer = new Timer(timerCallback, null, 10000, 2000);
         }
         public void AddTable(string table, string columns)
         {
@@ -39,11 +39,8 @@ namespace DisconnectedMode
             set.Tables[table].PrimaryKey =
                 new DataColumn[] { set.Tables[table].Columns[0] };
             string cmd = $"SELECT {columns} FROM {table}";
-            connection.Open();
             SqlDataAdapter adapter = new SqlDataAdapter(cmd, connection);
-            connection.Close();
             adapter.Fill(set.Tables[table]);
-            //Print(table);
         }
         public void AddRelation(string relation_name, string child, string parent)
         {
@@ -79,7 +76,7 @@ namespace DisconnectedMode
             }
             Console.WriteLine("\n================================================================\n");
         }
-        public void UpdateDataSet(object obj)
+        public void UpdateDataSet(object obj=null)
         {
             if (set.Tables.Count > 0)
             {
@@ -90,10 +87,8 @@ namespace DisconnectedMode
                         columns += columns != "" ? $",{column.ColumnName}" : column.ColumnName;
                     string cmd = $"SELECT {columns} FROM {table.TableName}";
                     Console.WriteLine(cmd);
-                    connection.Open();
                     SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd, connection);
-                    connection.Close();
-                    dataAdapter.Fill(set.Tables[table.TableName]);
+                    dataAdapter.Fill(this.set.Tables[table.TableName]);
                     dataAdapter.Dispose();
                 }
             }
