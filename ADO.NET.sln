@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DisconnectedMode", "Cache\D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConnectedMode", "ConnectedMode\ConnectedMode.csproj", "{4E50644C-E252-4DAA-809E-B51EEB0499FC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataSetWPF", "DataSetWPF\DataSetWPF.csproj", "{03D932EB-D760-46FB-8F0A-D25F7D4B583A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{4E50644C-E252-4DAA-809E-B51EEB0499FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4E50644C-E252-4DAA-809E-B51EEB0499FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4E50644C-E252-4DAA-809E-B51EEB0499FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03D932EB-D760-46FB-8F0A-D25F7D4B583A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03D932EB-D760-46FB-8F0A-D25F7D4B583A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03D932EB-D760-46FB-8F0A-D25F7D4B583A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03D932EB-D760-46FB-8F0A-D25F7D4B583A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
