@@ -5,8 +5,60 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DataSetWPF"
         mc:Ignorable="d"
-        Title="DataSetWPF" Height="450" Width="800">
+        Title="DataSetWPF" Height="450" Width="800" FontSize="14" Icon="pack://application:,,,/Resources/database_icon.ico" >
+    
     <Grid>
+        <Grid.RowDefinitions>
+                <RowDefinition Height="10" />
+                <RowDefinition Height="24" />
+                <RowDefinition Height="10" />
+                <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="10" />
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Column="1" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="90"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="90"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Direction "  HorizontalAlignment="Left" />
+            <ComboBox Name="cbDirection" Grid.Column="1" SelectionChanged="ComboBox_SelectionChanged"/>
+            <TextBlock Text="Group " Grid.Column="3" HorizontalAlignment="Center" />
+            <ComboBox Name="cbGroup" Grid.Column="4"/>
+        </Grid>
+        <DataGrid x:Name="dgvGroup" Grid.Row="3" Grid.Column="1" RowBackground="LightGray" 
+                  AlternatingRowBackground="White" AutoGenerateColumns="False" BorderBrush="DarkGray" BorderThickness="2" 
+                  ColumnWidth="*">
+            <DataGrid.Resources>
+                <Style x:Key="CenterTextStyle" TargetType="TextBlock">
+                    <Setter Property="TextAlignment" Value="Center"/>
+                </Style>
+            </DataGrid.Resources>
+            <DataGrid.ColumnHeaderStyle>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                </Style>
+            </DataGrid.ColumnHeaderStyle>
+
+
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="group__id" Binding="{Binding Path=group_id}" ElementStyle="{StaticResource CenterTextStyle}"/>
+                <DataGridTextColumn Header="group__name" Binding="{Binding Path=group_name}" ElementStyle="{StaticResource CenterTextStyle}"/>
+                <DataGridTextColumn Header="direction" Binding="{Binding Path=direction}" ElementStyle="{StaticResource CenterTextStyle}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+           
         
+       
+        
+
+
     </Grid>
+    
 </Window>
