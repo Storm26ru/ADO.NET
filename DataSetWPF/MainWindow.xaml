@@ -6,8 +6,9 @@
         xmlns:local="clr-namespace:DataSetWPF"
         mc:Ignorable="d"
         Title="DataSetWPF" Height="450" Width="800" FontSize="14" Icon="pack://application:,,,/Resources/database_icon.ico" >
-    
+
     <Grid>
+       
         <Grid.RowDefinitions>
                 <RowDefinition Height="10" />
                 <RowDefinition Height="24" />
@@ -53,12 +54,7 @@
                 <DataGridTextColumn Header="direction" Binding="{Binding Path=direction}" ElementStyle="{StaticResource CenterTextStyle}"/>
             </DataGrid.Columns>
         </DataGrid>
-           
-        
-       
-        
-
-
+    
     </Grid>
     
 </Window>
